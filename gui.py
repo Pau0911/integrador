@@ -26,6 +26,7 @@ class Gui(threading.Thread,Tk):
         self.panel.grid(row=10, columnspan=20)
         self.root.configure(background="yellow")
         self.root.attributes('-fullscreen', True)
+        self.startGui()
        
 
     def rojo(self):
@@ -54,12 +55,11 @@ class Gui(threading.Thread,Tk):
             #self.conexion.sendSound(value)
 
     def startGui(self):
-        self.mainloop()
+        self.update_idletasks()
+        self.update()
     
         
         
-   
-   
    
     #def set_state(q_state):
         #msg = q_state.get()
@@ -76,8 +76,7 @@ root=Tk()
 app = Gui(root)
 #LABEL = Label(root, text="Hello, world!")
 #LABEL.pack()
-
-app.mainloop()
+app.startGui()
 #prueba=Gui()
 #prueba.rojo()
 #prueba.amarillo()
