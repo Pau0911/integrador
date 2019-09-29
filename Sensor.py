@@ -13,7 +13,7 @@ class Sensor:
         #self.value = self.adc.read_adc(0, gain=GAIN)
         self.value=input("Ingrese un numero")
         print("sonido",self.value)
-        return int(self.value)
+        return self.value
     
   
 

@@ -1,7 +1,9 @@
+from Gui import Gui
 import paho.mqtt.client as mqtt
 import paho.mqtt.publish as publish
 
-MQTT_REMOTE_SERVER="192.168.30.84"
+
+MQTT_REMOTE_SERVER="10.1.0.181"
 MQTT_PATH_SEND= "iotSound"
 MQTT_PATH_RECV="iot"
 USER="iotbroker"
@@ -9,7 +11,10 @@ PASS="iotbroker"
 #topic = "iotDevice"
 
 class conexion:
-    def __init__(self):
+    
+    def __init__(self, gui):
+        self.gui=self.gui
+        self.flag=True
         self.client = self.mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
@@ -26,7 +31,7 @@ class conexion:
         except Exception as ex:
             print("Error in sendSound(). ex: {}".format(ex))
 
-     def onConnect(self, client, userdata, flags, rc):
+    def on_connect(self, client, userdata, flags, rc):
             print("External Comm: connected with result code " + str(rc))
             client.subscribe(MQTT_PATH_RECV)
 
@@ -36,18 +41,30 @@ class conexion:
         self.client.loop_forever()
        
 
-    def onMessage(self, client, userdata, msg):
-        print("%s %s" % (msg.topic, msg.payload))
-        result = msg.payload.decode("ascii")
-
-        if result == "on":
+    def on_message(self, client, userdata, msg):
+        #print("%s %s" % (msg.topic, msg.payload))
+        #result = msg.payload.decode("ascii")
+        #self.result=input("Ingrese estado")
+        #print("Estado",str(self.result))
+        print("Conexion")
+        result="on"
+        if self.result == "on":
+            print("conexion",self.getState)
+            self.gui.setState(True)
             print("Iniciando")
         
-        else result =="off":
+        else:
+            self.gui.setState(False)
             print("Apagando")
+       
+    def end_program (self):
+        self.flag =False
 
-           
-        
+    def is_ended (self):
+        self.flag=True
+
+
+
 
 
 
