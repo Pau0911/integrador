@@ -1,21 +1,22 @@
-from Gui import Gui
+from gui import Gui
 import paho.mqtt.client as mqtt
 import paho.mqtt.publish as publish
 
-
-MQTT_REMOTE_SERVER="10.1.0.181"
+#MQTT_REMOTE_SERVER="10.1.0.181"
+MQTT_REMOTE_SERVER="127.0.0.1"
 MQTT_PATH_SEND= "iotSound"
 MQTT_PATH_RECV="iot"
 USER="iotbroker"
 PASS="iotbroker"
+
 #topic = "iotDevice"
 
-class conexion:
+class Conexion:
     
     def __init__(self, gui):
-        self.gui=self.gui
-        self.flag=True
-        self.client = self.mqtt.Client()
+        self.gui = gui
+        self.flag = True
+        self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
         self.client.on_message = self.on_message
         self.client.username_pw_set(USER,PASS)
@@ -46,22 +47,22 @@ class conexion:
         #result = msg.payload.decode("ascii")
         #self.result=input("Ingrese estado")
         #print("Estado",str(self.result))
-        print("Conexion")
-        result="on"
-        if self.result == "on":
-            print("conexion",self.getState)
-            self.gui.setState(True)
-            print("Iniciando")
+        print("Ha llegado un mensaje !!!")
+        #result="on"
+        #if self.result == "on":
+        print("conexion ",self.gui.getState())
+        self.gui.setState(True)
+        print("Iniciando")
         
-        else:
-            self.gui.setState(False)
-            print("Apagando")
+        #else:
+         #   self.gui.setState(False)
+          #  print("Apagando")
        
     def end_program (self):
         self.flag =False
 
     def is_ended (self):
-        self.flag=True
+        self.flag = True
 
 
 

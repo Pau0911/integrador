@@ -11,7 +11,7 @@ class Sensor:
     def sensor(self):
         #self.value= 10
         #self.value = self.adc.read_adc(0, gain=GAIN)
-        self.value=input("Ingrese un numero")
+        self.value = int(input("Ingrese un numero"))
         print("sonido",self.value)
         return self.value
     
