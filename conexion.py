@@ -2,7 +2,7 @@ from gui import Gui
 import paho.mqtt.client as mqtt
 import paho.mqtt.publish as publish
 
-#MQTT_REMOTE_SERVER="10.1.0.181"
+#MQTT_REMOTE_SERVER="192.168.34.196"
 MQTT_REMOTE_SERVER="127.0.0.1"
 MQTT_PATH_SEND= "iotSound"
 MQTT_PATH_RECV="iot"
