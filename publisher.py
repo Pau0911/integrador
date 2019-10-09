@@ -1,12 +1,14 @@
 import paho.mqtt.publish as publish
+import time
+MQTT_REMOTE_SERVER="192.168.34.196"
 
-#MQTT_REMOTE_SERVER="192.168.34.196"
-
-MQTT_REMOTE_SERVER="127.0.0.1"
+#MQTT_REMOTE_SERVER="127.0.0.1"
 MQTT_PATH_SEND= "iotSound"
 MQTT_PATH_RECV="iot"
 USER="iotbroker"
 PASS="iotbroker"
+
+ahora = time.strftime("%c")
 
 def sendSound(sound):
     try:

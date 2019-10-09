@@ -10,7 +10,7 @@ class Gui:
         self.sensor=Sensor()
         
     def amarillo(self):
-        self.root.configure(background="yellow")
+        self.root.configure(background="green")
        
     def rojo(self):
         self.root.configure(background="red")
@@ -29,7 +29,7 @@ class Gui:
             #state
             print(self.getState())
             if(self.getState()==True):
-                if self.value >= 40:
+                if self.value >= 1000:
                     print("Hola")
                     sendSound(self.value)
                     self.rojo()

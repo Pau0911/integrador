@@ -2,8 +2,8 @@ from gui import Gui
 import paho.mqtt.client as mqtt
 import paho.mqtt.publish as publish
 
-#MQTT_REMOTE_SERVER="192.168.34.196"
-MQTT_REMOTE_SERVER="127.0.0.1"
+MQTT_REMOTE_SERVER="192.168.34.196"
+#MQTT_REMOTE_SERVER="127.0.0.1"
 MQTT_PATH_SEND= "iotSound"
 MQTT_PATH_RECV="iot"
 USER="iotbroker"
@@ -13,8 +13,9 @@ PASS="iotbroker"
 
 class Conexion:
     
-    def __init__(self, gui):
+    def __init__(self,gui):
         self.gui = gui
+	#gui.setState(True)
         self.flag = True
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
@@ -44,14 +45,14 @@ class Conexion:
 
     def on_message(self, client, userdata, msg):
         #print("%s %s" % (msg.topic, msg.payload))
-        #result = msg.payload.decode("ascii")
+       # self.result = msg.payload.decode("ascii")
         #self.result=input("Ingrese estado")
-        #print("Estado",str(self.result))
+       #print("Estado",str(self.result))
         print("Ha llegado un mensaje !!!")
         #result="on"
         #if self.result == "on":
-        print("conexion ",self.gui.getState())
-        self.gui.setState(True)
+        print("conexion ",gui.getState())
+       	self.gui.setState(True)
         print("Iniciando")
         
         #else:
