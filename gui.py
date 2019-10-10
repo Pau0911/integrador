@@ -20,26 +20,38 @@ class Gui:
 
     def getState(self):
         return self.state        
-       
     def run(self):
+        tiempo=0
+        contador=0
+        num=15
         while True:
-            time.sleep(1)
-            self.value = self.sensor.sensor()
-            print (self.value)
-            #state
-            print(self.getState())
-            if(self.getState()==True):
-                if self.value >= 1000:
-                    print("Hola")
-                    sendSound(self.value)
+            tiempo=tiempo+1
+            if(tiempo<num):
+                time.sleep(1)
+                self.value = self.sensor.sensor()
+                print (self.value)
+                #state
+                print(self.getState())
+                if(self.getState()==True):
+                    if self.value >= 1000:
+                        contador=contador+1
+                        print("Hola")
+                        sendSound(self.value)
+                        #self.rojo()
+                    else:
+                        #self.amarillo()
+                        sendSound(self.value)
+                else:
+                    print("Dispositivo apagado")
+            elif(tiempo==num):
+                tiempo=0
+                if(contador>=7):
                     self.rojo()
+                    print("Conte mas de 7")
                 else:
                     self.amarillo()
-                    sendSound(self.value)
-            else:
-                print("Dispositivo apagado")
-
-
+                contador=0
+    
     def startGui(self):
         self.root = Tk()
         self.root.title('NIVEL DE SONIDO')
