@@ -1,15 +1,18 @@
 from tkinter import * 
 from Sensor import Sensor
 from publisher import sendSound
+from publisher2 import sendSound2
+
 import time
 
 class Gui:
     root=None
     def __init__(self):
-        self.state = True
+        self.state = False
+
         self.sensor=Sensor()
         
-    def amarillo(self):
+    def verde(self):
         self.root.configure(background="green")
        
     def rojo(self):
@@ -29,7 +32,7 @@ class Gui:
             if(tiempo<num):
                 time.sleep(1)
                 self.value = self.sensor.sensor()
-                print (self.value)
+                print(self.value)
                 #state
                 print(self.getState())
                 if(self.getState()==True):
@@ -46,10 +49,11 @@ class Gui:
             elif(tiempo==num):
                 tiempo=0
                 if(contador>=7):
+                    sendSound2(self.value)
                     self.rojo()
                     print("Conte mas de 7")
                 else:
-                    self.amarillo()
+                    self.verde()
                 contador=0
     
     def startGui(self):
